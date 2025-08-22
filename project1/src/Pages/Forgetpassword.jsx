@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "../Firebase"; // apni firebase.jsx ka sahi path
+import { auth } from "../firebase"; // apni firebase.jsx ka sahi path
 
 function Forgetpassword() {
   const [email, setEmail] = useState("");

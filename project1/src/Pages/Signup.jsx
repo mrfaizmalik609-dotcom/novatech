@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../Firebase"; // ✅ apni firebase.jsx ka import
+import { auth, db } from "../firebase"; // ✅ apni firebase.jsx ka import
 import { doc, setDoc } from "firebase/firestore";
 
 function Signup() {

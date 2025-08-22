@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { db } from "../Firebase"; // Firebase ka sahi path
+import { db } from "../firebase"; // Firebase ka sahi path
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 function Contact() {
