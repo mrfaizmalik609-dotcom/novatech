@@ -15,7 +15,7 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import ForgetPassword from "./Pages/Forgetpassword";
 import Checkout from "./Pages/Checkout";
-import ThankYou from "./Pages/ThankYou";
+import ThankYou from "./Pages/Thankyou";
 import SingleProduct from "./Pages/SingleProduct";
 import HomePageData from "./Pages/HomePageData";
 
