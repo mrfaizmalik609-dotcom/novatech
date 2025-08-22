@@ -33,6 +33,30 @@ const products = [
 ];
 
 function Shop() {
+  const buttonStyleBlue = {
+    flex: "1",
+    backgroundColor: "#007bff",
+    color: "white",
+    border: "none",
+    padding: "12px",
+    borderRadius: "6px",
+    cursor: "pointer",
+    fontWeight: "600",
+    transition: "background-color 0.3s"
+  };
+
+  const buttonStyleGreen = {
+    flex: "1",
+    backgroundColor: "#28a745",
+    color: "white",
+    border: "none",
+    padding: "12px",
+    borderRadius: "6px",
+    cursor: "pointer",
+    fontWeight: "600",
+    transition: "background-color 0.3s"
+  };
+
   const [quantities, setQuantities] = useState(() => {
     const initial = {};
     products.forEach((p) => {
@@ -377,30 +401,6 @@ function Shop() {
       </main>
     </>
   );
-}
-
-const buttonStyleBlue = {
-  flex: 1,
-  backgroundColor: "#007bff",
-  color: "white",
-  border: "none",
-  padding: 12,
-  borderRadius: 6,
-  cursor: "pointer",
-  fontWeight: 600,
-  transition: "background-color 0.3s",
-};
-
-const buttonStyleGreen = {
-  flex: 1,
-  backgroundColor: "#28a745",
-  color: "white",
-  border: "none",
-  padding: 12,
-  borderRadius: 6,
-  cursor: "pointer",
-  fontWeight: 600,
-  transition: "background-color 0.3s",
 };
 
 export default Shop;
