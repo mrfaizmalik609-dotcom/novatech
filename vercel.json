@@ -1,11 +1,19 @@
 {
-  "buildCommand": "cd project1 && yarn install && vite build",
-  "outputDirectory": "project1/dist",
-  "framework": "vite",
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "project1/package.json",
+      "use": "@vercel/node",
+      "config": {
+        "buildCommand": "cd project1 && yarn install && vite build",
+        "outputDirectory": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/project1/dist/index.html"
     }
   ]
 }
