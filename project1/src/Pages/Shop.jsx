@@ -33,30 +33,6 @@ const products = [
 ];
 
 function Shop() {
-  const buttonStyleBlue = {
-    flex: "1",
-    backgroundColor: "#007bff",
-    color: "white",
-    border: "none",
-    padding: "12px",
-    borderRadius: "6px",
-    cursor: "pointer",
-    fontWeight: "600",
-    transition: "background-color 0.3s"
-  };
-
-  const buttonStyleGreen = {
-    flex: "1",
-    backgroundColor: "#28a745",
-    color: "white",
-    border: "none",
-    padding: "12px",
-    borderRadius: "6px",
-    cursor: "pointer",
-    fontWeight: "600",
-    transition: "background-color 0.3s"
-  };
-
   const [quantities, setQuantities] = useState(() => {
     const initial = {};
     products.forEach((p) => {
@@ -64,6 +40,25 @@ function Shop() {
     });
     return initial;
   });
+
+  const { addToCart, showCartMessage, cartMessage } = useContext(CartContext);
+  const navigate = useNavigate();
+
+  const handleQuantityChange = (productId, value) => {
+    let val = parseInt(value);
+    if (isNaN(val) || val < 1) val = 1;
+    else if (val > 99) val = 99;
+    setQuantities((prev) => ({ ...prev, [productId]: val }));
+  };
+
+  const handleAddToCart = (product) => {
+    addToCart(product, quantities[product.id]);
+  };
+
+  const handleBuyNow = (product) => {
+    addToCart(product, quantities[product.id]);
+    navigate("/checkout");
+  };
 
   // Add responsive styles
   const styles = `
@@ -224,17 +219,6 @@ function Shop() {
       <style>{styles}</style>
       <Header />
       <div className="shop-container">
-        <div className="products-grid">
-
-      <main
-        style={{
-          maxWidth: 1200,
-          margin: "100px auto 60px",
-          padding: "0 20px",
-          color: "grey",
-          position: "relative",
-        }}
-      >
         {showCartMessage && (
           <div
             style={{
@@ -253,6 +237,72 @@ function Shop() {
             {cartMessage}
           </div>
         )}
+        <div className="products-grid">
+          {products.map((product) => (
+            <div key={product.id} className="product-card">
+              <Link to={`/product/${product.id}`}>
+                <img 
+                  src={product.image} 
+                  alt={product.name} 
+                  className="product-image"
+                />
+              </Link>
+              <div className="product-info">
+                <h3 className="product-title">{product.name}</h3>
+                <p className="product-price">${product.price}</p>
+                <p className="product-description">{product.description}</p>
+                <div className="specs">
+                  <span>RAM: {product.ram}</span>
+                  <span>Battery: {product.battery}</span>
+                </div>
+                <div className="quantity-control">
+                  <label>Quantity:</label>
+                  <input
+                    type="number"
+                    min="1"
+                    max="99"
+                    value={quantities[product.id]}
+                    onChange={(e) => handleQuantityChange(product.id, e.target.value)}
+                    className="quantity-input"
+                  />
+                </div>
+                <div className="button-container">
+                  <button 
+                    onClick={() => handleAddToCart(product)}
+                    className="add-to-cart-btn"
+                  >
+                    Add to Cart
+                  </button>
+                  <button 
+                    onClick={() => handleBuyNow(product)}
+                    className="buy-now-btn"
+                  >
+                    Buy Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+            style={{
+              position: "fixed",
+              top: 20,
+              right: 20,
+              backgroundColor: "#28a745",
+              color: "white",
+              padding: "10px 20px",
+              borderRadius: 8,
+              boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+              zIndex: 1000,
+              fontWeight: "600",
+            }}
+          >
+            {cartMessage}
+          </div>
+        )}
+        <div className="products-grid">
+            {cartMessage}
+          </div>
+        )}
 
         <div
           style={{
@@ -262,28 +312,8 @@ function Shop() {
           }}
         >
           {products.map((product) => (
-            <div
-              key={product.id}
-              style={{
-                border: "1px solid #ddd",
-                borderRadius: 10,
-                padding: 20,
-                boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                backgroundColor: "#fff",
-                transition: "transform 0.3s ease, box-shadow 0.3s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-8px)";
-                e.currentTarget.style.boxShadow = "0 8px 20px rgba(0,0,0,0.15)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 4px 8px rgba(0,0,0,0.1)";
-              }}
-            >
+            <div key={product.id} className="product-card">
+              <div className="product-info">
               <Link to={`/product/${product.id}`} style={{ width: "100%" }}>
                 <img
                   src={product.image}
@@ -398,9 +428,10 @@ function Shop() {
             </div>
           ))}
         </div>
-      </main>
+      </div>
+      <Footer />
     </>
   );
-};
+}
 
 export default Shop;
