@@ -1,0 +1,11 @@
+{
+  "buildCommand": "cd project1 && yarn install && vite build",
+  "outputDirectory": "project1/dist",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
