@@ -1,0 +1,268 @@
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Header from "../Components/Header";
+import Footer from "../Components/Footer";
+import { CartContext } from "../context/CartContext";
+
+import product1 from "../assets/images/product-1.jpg";
+import product2 from "../assets/images/product-2.jpg";
+import product3 from "../assets/images/product-3.jpg";
+import product4 from "../assets/images/product-4.jpg";
+import product5 from "../assets/images/product-5.jpg";
+import product6 from "../assets/images/product-6.jpg";
+import product7 from "../assets/images/product-7.jpg";
+import product8 from "../assets/images/product-8.jpg";
+import product9 from "../assets/images/product-9.jpg";
+import product10 from "../assets/images/product-10.jpg";
+import product11 from "../assets/images/product-11.jpg";
+import product12 from "../assets/images/product-12.jpg";
+
+const products = [
+  { id: 1, name: "HP", price: 19.99, image: product1, ram: "8 GB", battery: "4000 mAh", description: "High performance laptop with long battery life." },
+  { id: 2, name: "HP", price: 29.99, image: product2, ram: "16 GB", battery: "4500 mAh", description: "Powerful laptop with premium display." },
+  { id: 3, name: "HP", price: 39.99, image: product3, ram: "8 GB", battery: "5000 mAh", description: "Lightweight and portable laptop for everyday use." },
+  { id: 4, name: "DELL", price: 49.99, image: product4, ram: "32 GB", battery: "6000 mAh", description: "High-end gaming laptop with RGB keyboard." },
+  { id: 5, name: "DELL", price: 59.99, image: product5, ram: "16 GB", battery: "4800 mAh", description: "Business laptop with robust security features." },
+  { id: 6, name: "DELL", price: 69.99, image: product6, ram: "8 GB", battery: "4000 mAh", description: "Affordable laptop with great performance." },
+  { id: 7, name: "LENOVO", price: 79.99, image: product7, ram: "24 GB", battery: "5200 mAh", description: "Creative laptop optimized for multimedia tasks." },
+  { id: 8, name: "LENOVO", price: 89.99, image: product8, ram: "16 GB", battery: "5500 mAh", description: "Ultra-thin laptop with long-lasting battery." },
+  { id: 9, name: "LENOVO", price: 99.99, image: product9, ram: "32 GB", battery: "6000 mAh", description: "Premium laptop for professionals and developers." },
+  { id: 10, name: "HP", price: 109.99, image: product10, ram: "64 GB", battery: "7000 mAh", description: "Top-tier laptop with ultimate specs." },
+  { id: 11, name: "APPLE", price: 119.99, image: product11, ram: "32 GB", battery: "6500 mAh", description: "High-performance ASUS laptop with advanced cooling system." },
+  { id: 12, name: "APPLE", price: 129.99, image: product12, ram: "16 GB", battery: "8000 mAh", description: "Sleek MacBook with Retina display and all-day battery life." },
+];
+
+function Shop() {
+  const [quantities, setQuantities] = useState(() => {
+    const initial = {};
+    products.forEach((p) => {
+      initial[p.id] = 1;
+    });
+    return initial;
+  });
+
+  const { addToCart, showCartMessage, cartMessage } = useContext(CartContext);
+  const navigate = useNavigate();
+
+  const handleQuantityChange = (productId, value) => {
+    let val = parseInt(value);
+    if (isNaN(val) || val < 1) val = 1;
+    else if (val > 99) val = 99;
+    setQuantities((prev) => ({ ...prev, [productId]: val }));
+  };
+
+  const handleAddToCart = (product) => {
+    addToCart(product, quantities[product.id]);
+  };
+
+  const handleBuyNow = (product) => {
+    addToCart(product, quantities[product.id]);
+    navigate("/checkout");
+  };
+
+  return (
+    <>
+      <Header />
+
+      <main
+        style={{
+          maxWidth: 1200,
+          margin: "100px auto 60px",
+          padding: "0 20px",
+          color: "grey",
+          position: "relative",
+        }}
+      >
+        {showCartMessage && (
+          <div
+            style={{
+              position: "fixed",
+              top: 20,
+              right: 20,
+              backgroundColor: "#28a745",
+              color: "white",
+              padding: "10px 20px",
+              borderRadius: 8,
+              boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+              zIndex: 1000,
+              fontWeight: "600",
+            }}
+          >
+            {cartMessage}
+          </div>
+        )}
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: 30,
+          }}
+        >
+          {products.map((product) => (
+            <div
+              key={product.id}
+              style={{
+                border: "1px solid #ddd",
+                borderRadius: 10,
+                padding: 20,
+                boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                backgroundColor: "#fff",
+                transition: "transform 0.3s ease, box-shadow 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-8px)";
+                e.currentTarget.style.boxShadow = "0 8px 20px rgba(0,0,0,0.15)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "0 4px 8px rgba(0,0,0,0.1)";
+              }}
+            >
+              <Link to={`/product/${product.id}`} style={{ width: "100%" }}>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  style={{
+                    width: "100%",
+                    height: 200,
+                    objectFit: "cover",
+                    borderRadius: 8,
+                    marginBottom: 15,
+                    cursor: "pointer",
+                    transition: "transform 0.4s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "scale(1.05)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "scale(1)";
+                  }}
+                />
+              </Link>
+
+              <h3
+                style={{
+                  margin: "0 0 10px",
+                  fontSize: 20,
+                  textAlign: "center",
+                  color: "#333",
+                }}
+              >
+                {product.name}
+              </h3>
+              <p
+                style={{
+                  fontWeight: "bold",
+                  fontSize: 18,
+                  marginBottom: 15,
+                  color: "#007bff",
+                }}
+              >
+                ${product.price.toFixed(2)}
+              </p>
+
+              <div
+                style={{
+                  marginBottom: 15,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                }}
+              >
+                <label
+                  htmlFor={`qty-${product.id}`}
+                  style={{ fontWeight: 600, userSelect: "none" }}
+                >
+                  Quantity:
+                </label>
+                <input
+                  id={`qty-${product.id}`}
+                  type="number"
+                  min={1}
+                  max={99}
+                  value={quantities[product.id]}
+                  onChange={(e) =>
+                    handleQuantityChange(product.id, e.target.value)
+                  }
+                  style={{
+                    width: 60,
+                    padding: 6,
+                    borderRadius: 5,
+                    border: "1px solid #ccc",
+                    textAlign: "center",
+                    fontSize: 16,
+                  }}
+                />
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  gap: 15,
+                  width: "100%",
+                  justifyContent: "center",
+                }}
+              >
+                <button
+                  onClick={() => handleAddToCart(product)}
+                  style={buttonStyleBlue}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.backgroundColor = "#0056b3")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.backgroundColor = "#007bff")
+                  }
+                >
+                  Add to Cart
+                </button>
+
+                <button
+                  onClick={() => handleBuyNow(product)}
+                  style={buttonStyleGreen}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.backgroundColor = "#1e7e34")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.backgroundColor = "#28a745")
+                  }
+                >
+                  Buy Now
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+    </>
+  );
+}
+
+const buttonStyleBlue = {
+  flex: 1,
+  backgroundColor: "#007bff",
+  color: "white",
+  border: "none",
+  padding: 12,
+  borderRadius: 6,
+  cursor: "pointer",
+  fontWeight: 600,
+  transition: "background-color 0.3s",
+};
+
+const buttonStyleGreen = {
+  flex: 1,
+  backgroundColor: "#28a745",
+  color: "white",
+  border: "none",
+  padding: 12,
+  borderRadius: 6,
+  cursor: "pointer",
+  fontWeight: 600,
+  transition: "background-color 0.3s",
+};
+
+export default Shop;
