@@ -21,7 +21,7 @@ import HomePageData from "./Pages/Homepagedata";
 
 // Context
 import { CartProvider } from "./context/Cartcontext";
-import { AuthProvider } from "./context/Authcontext"; // Import the AuthProvider
+import { AuthProvider } from "./context/AuthContext"; // Import the AuthProvider
 
 function App() {
   return (
