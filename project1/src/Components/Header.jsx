@@ -43,13 +43,16 @@ function Header() {
           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
           background-color: #0a2342 !important;
           box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-          padding: 1rem 1.5rem;
+          padding: 0.5rem 1rem;
           z-index: 1050;
+          position: sticky;
+          top: 0;
+          width: 100%;
         }
 
         /* Brand styling */
         .navbar-brand {
-          font-size: 1.8rem;
+          font-size: clamp(1.2rem, 4vw, 1.8rem);
           font-weight: 900;
           color: #FFD700 !important;
           user-select: none;
@@ -67,18 +70,19 @@ function Header() {
 
         /* Nav links container */
         .navbar-nav {
-          gap: 2rem;
+          gap: 1rem;
           font-weight: 600;
-          font-size: 1.05rem;
+          font-size: clamp(0.9rem, 2.5vw, 1.05rem);
         }
 
         /* Nav links */
         .nav-link {
           color: #eee !important;
           position: relative;
-          padding: 0.75rem 0.75rem;
+          padding: 0.5rem;
           transition: color 0.3s ease;
           line-height: 1.6;
+          white-space: nowrap;
         }
         .nav-link:hover,
         .nav-link.active {
@@ -98,6 +102,58 @@ function Header() {
         }
         .nav-link:hover::after {
           width: 60%;
+        }
+
+        /* Mobile menu button */
+        .navbar-toggler {
+          padding: 0.25rem 0.5rem;
+          font-size: 1rem;
+          border: none;
+          background: transparent;
+          color: #FFD700;
+        }
+
+        /* Mobile navigation */
+        @media (max-width: 991px) {
+          .navbar-collapse {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #0a2342;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+          }
+          
+          .navbar-nav {
+            gap: 0.5rem;
+          }
+
+          .nav-link {
+            padding: 0.75rem;
+            text-align: center;
+          }
+        }
+
+        /* Cart badge */
+        .cart-badge {
+          position: relative;
+          display: inline-flex;
+          align-items: center;
+        }
+
+        .cart-count {
+          position: absolute;
+          top: -8px;
+          right: -8px;
+          background: #FFD700;
+          color: #0a2342;
+          border-radius: 50%;
+          padding: 0.25rem 0.5rem;
+          font-size: 0.75rem;
+          min-width: 1.5rem;
+          text-align: center;
+        }
           background: #ffea00;
         }
 
