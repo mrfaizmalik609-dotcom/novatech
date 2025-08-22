@@ -1,18 +1,6 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "project1",
-      "use": "@vercel/static-build",
-      "config": {
-        "zeroConfig": true,
-        "buildCommand": "cd project1 && yarn install && yarn build",
-        "outputDirectory": "project1/dist"
-      }
-    }
-  ],
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/.*", "dest": "/project1/dist/index.html" }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "buildCommand": "cd project1 && yarn install && yarn build",
+  "outputDirectory": "project1/dist",
+  "framework": "vite"
 }
