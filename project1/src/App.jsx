@@ -17,7 +17,7 @@ import ForgetPassword from "./Pages/Forgetpassword";
 import Checkout from "./Pages/Checkout";
 import ThankYou from "./Pages/Thankyou";
 import SingleProduct from "./Pages/SingleProduct";
-import HomePageData from "./Pages/HomePageData";
+import HomePageData from "./Pages/Homepagedata";
 
 // Context
 import { CartProvider } from "./context/CartContext";
