@@ -1,8 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "./", // ⚡ relative paths ka support (important for Vercel)
+  base: "./", // yeh relative paths ke liye zaroori hai
 });
