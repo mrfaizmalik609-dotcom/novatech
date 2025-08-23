@@ -19,8 +19,8 @@ import ThankYou from "./Pages/Thankyou";
 import SingleProduct from "./Pages/SingleProduct";
 import HomePageData from "./Pages/Homepagedata";
 
-// Context
-import { CartProvider } from "./context/Cartcontext";
+// Context ✅ FIXED
+import { CartProvider } from "./context/CartContext";  
 import { AuthProvider } from "./context/AuthContext";
 
 function App() {
