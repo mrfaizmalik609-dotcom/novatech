@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-import { CartContext } from "../context/Cartcontext";
+import { CartContext } from "../context/CartContext";
 
 import product1 from "../assets/images/product-1.jpg";
 import product2 from "../assets/images/product-2.jpg";

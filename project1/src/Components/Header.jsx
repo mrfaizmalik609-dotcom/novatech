@@ -1,6 +1,6 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { CartContext } from "../context/Cartcontext";
+import { CartContext } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext"; // Import useAuth
 
 function Header() {
