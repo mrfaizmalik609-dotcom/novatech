@@ -21,29 +21,33 @@ import HomePageData from "./Pages/Homepagedata";
 
 // Context
 import { CartProvider } from "./context/Cartcontext";
-import { AuthProvider } from "./context/AuthContext"; // Import the AuthProvider
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
-    <AuthProvider> {/* Wrap with AuthProvider */}
+    <AuthProvider>
       <CartProvider>
         <Router>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/forgetpassword" element={<ForgetPassword />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/thankyou" element={<ThankYou />} />
-            <Route path="/product/:id" element={<SingleProduct />} />
-            <Route path="/homepagedata/:id" element={<HomePageData />} />
-          </Routes>
-          <Footer />
+          <div className="App">
+            <Header />
+            <main>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/shop" element={<Shop />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/forgetpassword" element={<ForgetPassword />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/thankyou" element={<ThankYou />} />
+                <Route path="/product/:id" element={<SingleProduct />} />
+                <Route path="/homepagedata/:id" element={<HomePageData />} />
+              </Routes>
+            </main>
+            <Footer />
+          </div>
         </Router>
       </CartProvider>
     </AuthProvider>

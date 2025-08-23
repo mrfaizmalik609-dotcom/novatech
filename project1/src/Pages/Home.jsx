@@ -21,116 +21,32 @@ function Home() {
   return (
     <div style={{ textAlign: "center", marginBottom: "40px", marginTop: "0" }}>
       <style>{`
-        .home-container {
-          width: 100%;
-          max-width: 1440px;
-          margin: 0 auto;
-          padding: 1rem;
-        }
-
-        .home-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 1.5rem;
-          padding: 1rem;
-        }
-
         .home-card {
           position: relative;
-          width: 100%;
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-          overflow: hidden;
-          border-radius: 8px;
-          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-          transition: transform 0.3s ease;
+          display: inline-block;
         }
-
-        .home-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-        }
-
         .home-img {
           width: 100%;
-          height: 250px;
+          max-width: 400px;
+          height: auto;
+          aspect-ratio: 4 / 3;
           object-fit: cover;
-          border-radius: 8px 8px 0 0;
-          transition: transform 0.4s ease;
+          transition: transform 0.4s ease, box-shadow 0.4s ease;
+          cursor: pointer;
         }
-
         .home-img:hover {
           transform: scale(1.05);
-        }
-
-        /* Responsive text sizing */
-        .home-title {
-          font-size: clamp(1.5rem, 4vw, 2.5rem);
-          margin-bottom: 1rem;
-          color: #0a2342;
-        }
-
-        .home-description {
-          font-size: clamp(0.9rem, 2vw, 1.1rem);
-          line-height: 1.6;
-          color: #333;
-          margin-bottom: 2rem;
+          box-shadow: 0 10px 25px rgba(0,0,0,0.25);
         }
 
         /* Fancy Gradient Button */
         .open-overlay-btn {
           position: absolute;
-          bottom: 1rem;
-          left: 1rem;
-          right: 1rem;
+          bottom: 10px;
+          left: 10px;
           background: linear-gradient(135deg, #ffdd00, #d4af37);
           color: #0a0f2c;
           font-weight: 600;
-          text-align: center;
-          padding: 0.75rem 1.5rem;
-          border-radius: 6px;
-          border: none;
-          cursor: pointer;
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .open-overlay-btn:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        /* Responsive layout adjustments */
-        @media (max-width: 768px) {
-          .home-grid {
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            padding: 0.5rem;
-          }
-
-          .home-card {
-            margin-bottom: 1rem;
-          }
-
-          .home-img {
-            height: 200px;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .home-container {
-            padding: 0.5rem;
-          }
-
-          .home-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .open-overlay-btn {
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
-          }
-        }
           font-size: 0.85rem;
           padding: 6px 14px;
           border-radius: 30px;
@@ -147,14 +63,13 @@ function Home() {
         .banner-container {
           position: relative;
           width: 100%;
-          max-width: 1500px;
+          max-width: 1600px;
           margin: 0 auto 20px auto;
         }
         .banner-img {
           width: 100%;
           height: auto;
           display: block;
-          border-radius: 8px;
         }
         .shop-btn {
           position: absolute;

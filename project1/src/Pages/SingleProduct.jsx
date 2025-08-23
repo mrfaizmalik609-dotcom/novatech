@@ -249,12 +249,11 @@ function SingleProduct() {
 
   if (!product) {
     return (
-      <>
-        <Header />
+      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
         <main style={{ 
           padding: "80px 20px", 
           textAlign: "center",
-          minHeight: "60vh",
+          flex: 1,
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -286,7 +285,7 @@ function SingleProduct() {
           </button>
         </main>
         <Footer />
-      </>
+      </div>
     );
   }
 
@@ -308,8 +307,7 @@ function SingleProduct() {
   };
 
   return (
-    <>
-      <Header />
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       
       {/* Notification */}
       {notification && (
@@ -332,11 +330,11 @@ function SingleProduct() {
 
       <main style={{ 
         maxWidth: "1200px", 
-        margin: "100px auto", 
-        padding: "20px", 
+        margin: "0 auto", 
+        padding: "120px 20px 40px", 
         fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif", 
         color: "#333",
-        minHeight: "70vh"
+        flex: 1
       }}>
         
         {/* Breadcrumb */}
@@ -392,7 +390,7 @@ function SingleProduct() {
           </div>
 
           {/* Product Details */}
-          <div>
+          <div className="product-details">
             <h1 style={{ 
               fontSize: "2.5rem", 
               marginBottom: "15px", 
@@ -403,7 +401,7 @@ function SingleProduct() {
               {product.name}
             </h1>
             
-            <div style={{ 
+            <div className="price" style={{ 
               fontSize: "2rem", 
               fontWeight: "700", 
               color: "#28a745", 
@@ -448,7 +446,7 @@ function SingleProduct() {
               }}>
                 Specifications
               </h3>
-              <div style={{ 
+              <div className="specs-grid" style={{ 
                 display: "grid", 
                 gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", 
                 gap: "10px"
@@ -482,7 +480,7 @@ function SingleProduct() {
             </div>
 
             {/* Quantity and Add to Cart */}
-            <div style={{ 
+            <div className="quantity-cart-section" style={{ 
               display: "flex", 
               alignItems: "center", 
               gap: "20px", 
@@ -552,7 +550,7 @@ function SingleProduct() {
             </div>
 
             {/* Additional Actions */}
-            <div style={{ 
+            <div className="additional-actions" style={{ 
               display: "flex", 
               gap: "15px", 
               flexWrap: "wrap"
@@ -615,7 +613,7 @@ function SingleProduct() {
           }}>
             Key Features
           </h3>
-          <div style={{ 
+          <div className="features-grid" style={{ 
             display: "grid", 
             gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", 
             gap: "20px"
@@ -710,7 +708,8 @@ function SingleProduct() {
           `}
         </style>
       </main>
-    </>
+    
+    </div>
   );
 }
 
