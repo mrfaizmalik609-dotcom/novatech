@@ -20,7 +20,7 @@ import SingleProduct from "./Pages/SingleProduct";
 import HomePageData from "./Pages/Homepagedata";
 
 // Context
-import { CartProvider } from "./context/CartContext";
+import { CartProvider } from "./context/Cartcontext";
 import { AuthProvider } from "./context/AuthContext";
 
 function App() {
