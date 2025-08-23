@@ -8,6 +8,7 @@ function Checkout() {
   const { cartItems, clearCart } = useContext(CartContext);
   const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -134,10 +135,13 @@ function Checkout() {
       });
 
       setSuccess("Order placed successfully!");
-      clearCart(); // Clear the cart after successful order
+      setShowSuccessPopup(true);
+      clearCart();
+      
+      // Redirect to thank you page after 2 seconds
       setTimeout(() => {
         navigate("/thankyou");
-      }, 1500);
+      }, 2000);
     } catch (err) {
       console.error("Firestore Error:", err);
       setError("Failed to place order. Please try again later.");
@@ -146,7 +150,7 @@ function Checkout() {
     }
   };
 
-  if (cartItems.length === 0) {
+  if (cartItems.length === 0 && !showSuccessPopup) {
     return (
       <main className="empty-checkout">
         <div className="empty-content">
@@ -164,6 +168,18 @@ function Checkout() {
 
   return (
     <main className="checkout-main">
+      {/* Success Popup */}
+      {showSuccessPopup && (
+        <div className="success-popup-overlay">
+          <div className="success-popup">
+            <div className="popup-icon">✅</div>
+            <h3>Order Confirmed!</h3>
+            <p>Your order has been successfully placed.</p>
+            <p>Redirecting to thank you page...</p>
+          </div>
+        </div>
+      )}
+
       {/* Header with Progress Bar */}
       <div className="checkout-header">
         <div className="container">
@@ -409,7 +425,7 @@ function Checkout() {
                       onChange={handleChange}
                       placeholder="1234 5678 9012 3456"
                       required
-                      className="form-input"
+                      className="form-input card-input"
                       maxLength="19"
                     />
                     <div className="card-icons">💳</div>
@@ -424,7 +440,7 @@ function Checkout() {
                       onChange={handleChange}
                       placeholder="John Doe"
                       required
-                      className="form-input"
+                      className="form-input card-input"
                     />
                   </div>
 
@@ -438,7 +454,7 @@ function Checkout() {
                         onChange={handleChange}
                         placeholder="MM/YY"
                         required
-                        className="form-input"
+                        className="form-input card-input"
                         maxLength="5"
                       />
                     </div>
@@ -451,7 +467,7 @@ function Checkout() {
                         onChange={handleChange}
                         placeholder="123"
                         required
-                        className="form-input"
+                        className="form-input card-input"
                         maxLength="4"
                       />
                     </div>
@@ -474,7 +490,7 @@ function Checkout() {
 
               <button
                 type="submit"
-                disabled={!isFormValid() || isProcessing}
+                disabled={!isFormValid() || isProcessing || showSuccessPopup}
                 className={`place-order-btn ${isProcessing ? 'processing' : ''}`}
               >
                 {isProcessing ? (
@@ -500,7 +516,69 @@ function Checkout() {
         </form>
       </div>
 
-      <style>{checkoutStyles}</style>
+      <style>{`
+        ${checkoutStyles}
+        
+        /* Success Popup Styles */
+        .success-popup-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.7);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1000;
+          animation: fadeIn 0.3s ease;
+        }
+        
+        .success-popup {
+          background: white;
+          padding: 40px;
+          border-radius: 20px;
+          text-align: center;
+          max-width: 400px;
+          width: 90%;
+          box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+          animation: scaleIn 0.3s ease;
+        }
+        
+        .popup-icon {
+          font-size: 4rem;
+          margin-bottom: 20px;
+          animation: bounce 1s ease infinite;
+        }
+        
+        .success-popup h3 {
+          color: #28a745;
+          margin-bottom: 15px;
+          font-size: 1.8rem;
+        }
+        
+        .success-popup p {
+          color: #666;
+          margin-bottom: 10px;
+          font-size: 1.1rem;
+        }
+        
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+          from { transform: scale(0.9); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes bounce {
+          0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+          40% { transform: translateY(-10px); }
+          60% { transform: translateY(-5px); }
+        }
+      `}</style>
     </main>
   );
 }
@@ -746,6 +824,7 @@ const checkoutStyles = `
     font-size: 1rem;
     transition: all 0.3s ease;
     background: #fafbfc;
+    color: #333 !important;
   }
 
   .form-input:focus {
@@ -753,6 +832,22 @@ const checkoutStyles = `
     outline: none;
     background: white;
     box-shadow: 0 0 0 4px rgba(102,126,234,0.1);
+    color: #333 !important;
+  }
+
+  /* Card input specific styles with dark text */
+  .card-input {
+    color: #333 !important;
+    background: white !important;
+  }
+
+  .card-input:focus {
+    color: #333 !important;
+    background: white !important;
+  }
+
+  .card-input::placeholder {
+    color: #999 !important;
   }
 
   .input-icon {
@@ -957,11 +1052,12 @@ const checkoutStyles = `
   }
 
   .card-details {
-    background: #f8f9fa;
+    background: white;
     border-radius: 12px;
     padding: 25px;
     margin-bottom: 25px;
-    border: 2px dashed #667eea;
+    border: 2px solid #667eea;
+    box-shadow: 0 5px 15px rgba(102,126,234,0.1);
   }
 
   .card-row {
