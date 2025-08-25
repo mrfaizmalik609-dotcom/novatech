@@ -1,0 +1,6 @@
+{
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "buildCommand": "cd project1 && yarn install && yarn build",
+  "outputDirectory": "project1/dist",
+  "framework": "vite"
+}
