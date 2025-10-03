@@ -350,16 +350,18 @@ function SingleProduct() {
       {notification && (
         <div style={{
           position: "fixed",
-          top: "100px",
-          right: "20px",
+          top: "80px",
+          right: "10px",
+          left: "10px",
           backgroundColor: "#28a745",
           color: "white",
-          padding: "15px 20px",
+          padding: "12px 16px",
           borderRadius: "8px",
           boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
           zIndex: 1000,
           fontSize: "14px",
-          fontWeight: "600"
+          fontWeight: "600",
+          textAlign: "center"
         }}>
           {notification}
         </div>
@@ -369,16 +371,18 @@ function SingleProduct() {
       {quantityError && (
         <div style={{
           position: "fixed",
-          top: "100px",
-          left: "20px",
+          top: "80px",
+          right: "10px",
+          left: "10px",
           backgroundColor: "#dc3545",
           color: "white",
-          padding: "15px 20px",
+          padding: "12px 16px",
           borderRadius: "8px",
           boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
           zIndex: 1000,
           fontSize: "14px",
-          fontWeight: "600"
+          fontWeight: "600",
+          textAlign: "center"
         }}>
           ⚠️ {quantityError}
         </div>
@@ -387,14 +391,20 @@ function SingleProduct() {
       <main style={{ 
         maxWidth: "1200px", 
         margin: "0 auto", 
-        padding: "120px 20px 40px", 
+        padding: "80px 15px 20px",
         fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif", 
         color: "#333",
-        flex: 1
+        flex: 1,
+        width: "100%",
+        overflowX: "hidden"
       }}>
         
         {/* Breadcrumb */}
-        <nav style={{ marginBottom: "30px", fontSize: "14px" }}>
+        <nav style={{ 
+          marginBottom: "20px", 
+          fontSize: "14px",
+          padding: "0 5px"
+        }}>
           <span 
             onClick={() => navigate("/")} 
             style={{ 
@@ -405,7 +415,7 @@ function SingleProduct() {
           >
             Home
           </span>
-          <span style={{ margin: "0 10px", color: "#666" }}>›</span>
+          <span style={{ margin: "0 8px", color: "#666" }}>›</span>
           <span 
             onClick={() => navigate("/shop")} 
             style={{ 
@@ -416,62 +426,75 @@ function SingleProduct() {
           >
             Shop
           </span>
-          <span style={{ margin: "0 10px", color: "#666" }}>›</span>
-          <span style={{ color: "#666" }}>{product.name}</span>
+          <span style={{ margin: "0 8px", color: "#666" }}>›</span>
+          <span style={{ 
+            color: "#666",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "inline-block",
+            maxWidth: "150px"
+          }}>
+            {product.name}
+          </span>
         </nav>
 
         <div style={{ 
           display: "grid", 
-          gridTemplateColumns: "1fr 1fr", 
-          gap: "60px", 
+          gridTemplateColumns: "1fr",
+          gap: "30px", 
           alignItems: "start",
-          marginBottom: "40px"
+          marginBottom: "30px",
+          width: "100%"
         }}>
           
           {/* Product Image */}
-          <div style={{ textAlign: "center" }}>
+          <div style={{ 
+            textAlign: "center",
+            padding: "0 10px"
+          }}>
             <img 
               src={product.image} 
               alt={product.name} 
               style={{ 
-                maxWidth: "100%", 
+                width: "100%",
+                maxWidth: "400px",
                 height: "auto",
                 borderRadius: "12px", 
                 boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
-                transition: "transform 0.3s ease"
               }} 
-              onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.02)")}
-              onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
             />
           </div>
 
           {/* Product Details */}
-          <div className="product-details">
+          <div className="product-details" style={{ padding: "0 10px" }}>
             <h1 style={{ 
-              fontSize: "2.5rem", 
-              marginBottom: "15px", 
+              fontSize: "1.8rem", 
+              marginBottom: "12px", 
               color: "#007bff", 
               fontWeight: "700",
-              lineHeight: "1.2"
+              lineHeight: "1.2",
+              wordWrap: "break-word"
             }}>
               {product.name}
             </h1>
             
             <div className="price" style={{ 
-              fontSize: "2rem", 
+              fontSize: "1.6rem", 
               fontWeight: "700", 
               color: "#28a745", 
-              marginBottom: "25px",
+              marginBottom: "20px",
               display: "flex",
               alignItems: "center",
-              gap: "10px"
+              gap: "8px",
+              flexWrap: "wrap"
             }}>
               <span>${product.price.toFixed(2)}</span>
               <span style={{ 
-                fontSize: "0.8rem", 
+                fontSize: "0.7rem", 
                 backgroundColor: "#28a745", 
                 color: "white", 
-                padding: "4px 8px", 
+                padding: "3px 6px", 
                 borderRadius: "4px",
                 fontWeight: "500"
               }}>
@@ -480,11 +503,11 @@ function SingleProduct() {
             </div>
 
             <p style={{ 
-              fontSize: "1.1rem", 
-              marginBottom: "30px", 
-              lineHeight: "1.6", 
+              fontSize: "1rem", 
+              marginBottom: "20px", 
+              lineHeight: "1.5", 
               color: "#555",
-              padding: "20px",
+              padding: "15px",
               backgroundColor: "#f8f9fa",
               borderRadius: "8px",
               border: "1px solid #e9ecef"
@@ -493,10 +516,10 @@ function SingleProduct() {
             </p>
 
             {/* Specifications */}
-            <div style={{ marginBottom: "30px" }}>
+            <div style={{ marginBottom: "25px" }}>
               <h3 style={{ 
-                fontSize: "1.4rem", 
-                marginBottom: "15px", 
+                fontSize: "1.2rem", 
+                marginBottom: "12px", 
                 color: "#333",
                 fontWeight: "600"
               }}>
@@ -504,14 +527,14 @@ function SingleProduct() {
               </h3>
               <div className="specs-grid" style={{ 
                 display: "grid", 
-                gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", 
-                gap: "10px"
+                gridTemplateColumns: "1fr",
+                gap: "8px"
               }}>
                 {Object.entries(product.specs).map(([key, value]) => (
                   <div key={key} style={{ 
                     display: "flex", 
-                    justifyContent: "space-between",
-                    padding: "12px",
+                    flexDirection: "column",
+                    padding: "10px",
                     backgroundColor: "#f8f9fa",
                     borderRadius: "6px",
                     border: "1px solid #e9ecef"
@@ -519,14 +542,16 @@ function SingleProduct() {
                     <strong style={{ 
                       textTransform: "capitalize", 
                       color: "#495057",
-                      fontSize: "0.9rem"
+                      fontSize: "0.8rem",
+                      marginBottom: "4px"
                     }}>
                       {key.replace(/([A-Z])/g, ' $1').trim()}:
                     </strong>
                     <span style={{ 
                       color: "#007bff",
-                      fontSize: "0.9rem",
-                      fontWeight: "500"
+                      fontSize: "0.8rem",
+                      fontWeight: "500",
+                      lineHeight: "1.3"
                     }}>
                       {value}
                     </span>
@@ -538,16 +563,21 @@ function SingleProduct() {
             {/* Quantity and Add to Cart */}
             <div className="quantity-cart-section" style={{ 
               display: "flex", 
-              alignItems: "center", 
-              gap: "20px", 
-              marginBottom: "30px",
-              padding: "20px",
+              flexDirection: "column",
+              gap: "15px", 
+              marginBottom: "25px",
+              padding: "15px",
               backgroundColor: "#ffffff",
               border: "2px solid #e9ecef",
-              borderRadius: "12px",
-              flexWrap: "wrap"
+              borderRadius: "12px"
             }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <div style={{ 
+                display: "flex", 
+                alignItems: "center", 
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+                gap: "10px"
+              }}>
                 <label htmlFor="quantity" style={{ 
                   fontWeight: "600", 
                   fontSize: "16px", 
@@ -556,23 +586,24 @@ function SingleProduct() {
                 }}>
                   Quantity:
                 </label>
-                <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                   <button
                     onClick={decrementQuantity}
                     disabled={quantity <= 1}
                     style={{
-                      width: "40px",
-                      height: "40px",
+                      width: "44px",
+                      height: "44px",
                       backgroundColor: quantity <= 1 ? "#e9ecef" : "#007bff",
                       color: quantity <= 1 ? "#6c757d" : "white",
                       border: "none",
-                      borderRadius: "6px",
+                      borderRadius: "8px",
                       cursor: quantity <= 1 ? "not-allowed" : "pointer",
                       fontSize: "18px",
                       fontWeight: "bold",
                       display: "flex",
                       alignItems: "center",
-                      justifyContent: "center"
+                      justifyContent: "center",
+                      touchAction: "manipulation"
                     }}
                   >
                     -
@@ -587,13 +618,15 @@ function SingleProduct() {
                     onChange={handleQuantityChange} 
                     style={{ 
                       width: "70px", 
+                      height: "44px",
                       padding: "10px", 
-                      borderRadius: "6px", 
+                      borderRadius: "8px", 
                       border: "2px solid #ced4da", 
                       fontSize: "16px", 
                       textAlign: "center",
                       fontWeight: "600",
-                      MozAppearance: "textfield"
+                      MozAppearance: "textfield",
+                      touchAction: "manipulation"
                     }} 
                   />
                   
@@ -601,59 +634,52 @@ function SingleProduct() {
                     onClick={incrementQuantity}
                     disabled={quantity >= MAX_QUANTITY}
                     style={{
-                      width: "40px",
-                      height: "40px",
+                      width: "44px",
+                      height: "44px",
                       backgroundColor: quantity >= MAX_QUANTITY ? "#e9ecef" : "#007bff",
                       color: quantity >= MAX_QUANTITY ? "#6c757d" : "white",
                       border: "none",
-                      borderRadius: "6px",
+                      borderRadius: "8px",
                       cursor: quantity >= MAX_QUANTITY ? "not-allowed" : "pointer",
                       fontSize: "18px",
                       fontWeight: "bold",
                       display: "flex",
                       alignItems: "center",
-                      justifyContent: "center"
+                      justifyContent: "center",
+                      touchAction: "manipulation"
                     }}
                   >
                     +
                   </button>
                 </div>
                 <span style={{ 
-                  fontSize: "0.8rem", 
+                  fontSize: "0.75rem", 
                   color: "#6c757d",
-                  marginLeft: "10px"
+                  textAlign: "center",
+                  width: "100%"
                 }}>
-                  (Max: {MAX_QUANTITY})
+                  (Maximum {MAX_QUANTITY} items per order)
                 </span>
               </div>
               
               <button
                 onClick={handleAddToCart}
                 style={{
-                  padding: "14px 30px",
+                  padding: "16px 20px",
                   backgroundColor: "#007bff",
                   color: "white",
-                  fontSize: "18px",
+                  fontSize: "16px",
                   fontWeight: "700",
-                  borderRadius: "8px",
+                  borderRadius: "10px",
                   border: "none",
                   cursor: "pointer",
                   transition: "all 0.3s ease",
                   boxShadow: "0 4px 12px rgba(0, 123, 255, 0.3)",
                   textTransform: "uppercase",
                   letterSpacing: "0.5px",
-                  flex: "1",
-                  minWidth: "200px"
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#0056b3";
-                  e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow = "0 6px 16px rgba(0, 123, 255, 0.4)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "#007bff";
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 123, 255, 0.3)";
+                  width: "100%",
+                  touchAction: "manipulation",
+                  minHeight: "54px"
                 }}
               >
                 Add to Cart
@@ -663,26 +689,25 @@ function SingleProduct() {
             {/* Additional Actions */}
             <div className="additional-actions" style={{ 
               display: "flex", 
-              gap: "15px", 
-              flexWrap: "wrap"
+              gap: "12px", 
+              flexDirection: "column"
             }}>
               <button
                 onClick={() => navigate("/cart")}
                 style={{
-                  padding: "12px 24px",
+                  padding: "14px 20px",
                   backgroundColor: "#28a745",
                   color: "white",
                   fontSize: "16px",
                   fontWeight: "600",
-                  borderRadius: "6px",
+                  borderRadius: "8px",
                   border: "none",
                   cursor: "pointer",
                   transition: "background-color 0.3s ease",
-                  flex: "1",
-                  minWidth: "140px"
+                  width: "100%",
+                  touchAction: "manipulation",
+                  minHeight: "50px"
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#218838")}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#28a745")}
               >
                 View Cart
               </button>
@@ -690,20 +715,19 @@ function SingleProduct() {
               <button
                 onClick={() => navigate("/shop")}
                 style={{
-                  padding: "12px 24px",
+                  padding: "14px 20px",
                   backgroundColor: "#6c757d",
                   color: "white",
                   fontSize: "16px",
                   fontWeight: "600",
-                  borderRadius: "6px",
+                  borderRadius: "8px",
                   border: "none",
                   cursor: "pointer",
                   transition: "background-color 0.3s ease",
-                  flex: "1",
-                  minWidth: "140px"
+                  width: "100%",
+                  touchAction: "manipulation",
+                  minHeight: "50px"
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#5a6268")}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#6c757d")}
               >
                 Continue Shopping
               </button>
@@ -713,15 +737,15 @@ function SingleProduct() {
 
         {/* Product Features Section */}
         <div style={{ 
-          marginTop: "60px",
-          padding: "40px",
+          marginTop: "40px",
+          padding: "20px",
           backgroundColor: "#f8f9fa",
           borderRadius: "12px",
           border: "1px solid #e9ecef"
         }}>
           <h3 style={{ 
-            fontSize: "1.8rem", 
-            marginBottom: "25px", 
+            fontSize: "1.4rem", 
+            marginBottom: "20px", 
             color: "#333",
             fontWeight: "600",
             textAlign: "center"
@@ -730,26 +754,28 @@ function SingleProduct() {
           </h3>
           <div className="features-grid" style={{ 
             display: "grid", 
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", 
-            gap: "20px"
+            gridTemplateColumns: "1fr",
+            gap: "12px"
           }}>
             {product.specs.features && product.specs.features.split(', ').map((feature, index) => (
               <div key={index} style={{ 
                 display: "flex", 
-                alignItems: "center",
-                gap: "12px",
-                padding: "15px",
+                alignItems: "flex-start",
+                gap: "10px",
+                padding: "12px",
                 backgroundColor: "white",
                 borderRadius: "8px",
                 boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
               }}>
                 <span style={{ 
-                  fontSize: "1.2rem", 
-                  color: "#28a745" 
+                  fontSize: "1rem", 
+                  color: "#28a745",
+                  marginTop: "2px"
                 }}>✓</span>
                 <span style={{ 
-                  fontSize: "1rem",
-                  color: "#495057"
+                  fontSize: "0.9rem",
+                  color: "#495057",
+                  lineHeight: "1.4"
                 }}>{feature}</span>
               </div>
             ))}
@@ -770,74 +796,71 @@ function SingleProduct() {
               -moz-appearance: textfield;
             }
             
-            @media (max-width: 768px) {
-              main > div:first-of-type {
-                grid-template-columns: 1fr !important;
-                gap: 30px !important;
-                text-align: center;
-              }
-              
-              .product-details h1 {
-                font-size: 2rem !important;
-              }
-              
-              .product-details .price {
-                font-size: 1.5rem !important;
-              }
-              
-              .quantity-cart-section {
-                flex-direction: column !important;
-                align-items: stretch !important;
-                gap: 15px !important;
-              }
-              
-              .quantity-cart-section > div:first-child {
-                justify-content: center !important;
-                flex-wrap: wrap !important;
-              }
-              
-              .quantity-cart-section input {
-                width: 80px !important;
-              }
-              
-              .quantity-cart-section button {
-                width: 100% !important;
-              }
-              
-              .additional-actions {
-                justify-content: center !important;
-              }
-              
-              .additional-actions button {
-                flex: 1;
-                min-width: 140px;
-              }
-              
-              .specs-grid {
-                grid-template-columns: 1fr !important;
-              }
-              
-              .features-grid {
-                grid-template-columns: 1fr !important;
+            /* Better touch targets for mobile */
+            button {
+              -webkit-tap-highlight-color: transparent;
+            }
+            
+            /* Prevent zoom on input focus for iOS */
+            @media screen and (max-width: 768px) {
+              input, select, textarea {
+                font-size: 16px !important;
               }
             }
             
-            @media (max-width: 480px) {
+            /* Tablet Styles */
+            @media (min-width: 768px) {
+              main {
+                padding: 100px 25px 30px !important;
+              }
+              
+              main > div:first-of-type {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 40px !important;
+              }
+              
               .product-details h1 {
+                font-size: 2.2rem !important;
+              }
+              
+              .product-details .price {
                 font-size: 1.8rem !important;
               }
               
-              .additional-actions {
-                flex-direction: column !important;
+              .specs-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
               }
               
-              .additional-actions button {
-                width: 100% !important;
+              .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+              }
+              
+              .quantity-cart-section {
+                flex-direction: row !important;
+                align-items: center !important;
               }
               
               .quantity-cart-section > div:first-child {
-                flex-direction: column !important;
-                gap: 10px !important;
+                flex: 1;
+              }
+              
+              .additional-actions {
+                flex-direction: row !important;
+              }
+            }
+            
+            /* Desktop Styles */
+            @media (min-width: 1024px) {
+              main {
+                padding: 120px 20px 40px !important;
+              }
+              
+              .product-details h1 {
+                font-size: 2.5rem !important;
+              }
+              
+              .product-details .price {
+                font-size: 2rem !important;
               }
             }
           `}
